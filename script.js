@@ -9,6 +9,12 @@ setInterval(() => {
   m = `${hours}:${minutes}:${seconds}`;
   p.innerHTML = m;
 
+
+}, 1000);
+
+function sir() {
+    let date = new Date();
+    let hours = date.getHours();
     let speechMessage;
     if (hours >= 1 && hours < 12) {
       speechMessage = "Good Morning, sir";
@@ -23,6 +29,11 @@ setInterval(() => {
     let speech = new SpeechSynthesisUtterance(speechMessage);
     speech.lang = "en-US";
     window.speechSynthesis.speak(speech);
-   
 
-}, 1000);
+}
+document.querySelector(".box").addEventListener("click", () => {
+  sir();
+  setTimeout(() => {
+    window.speechSynthesis.cancel();
+  }, 3000);
+});

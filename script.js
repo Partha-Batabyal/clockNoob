@@ -8,32 +8,29 @@ setInterval(() => {
   let seconds = date.getSeconds().toString().padStart(2, "0");
   m = `${hours}:${minutes}:${seconds}`;
   p.innerHTML = m;
-
-
 }, 1000);
 
 function sir() {
-    let date = new Date();
-    let hours = date.getHours();
-    let speechMessage;
-    if (hours >= 1 && hours < 12) {
-      speechMessage = "Good Morning, sir";
-    } else if (hours >= 12 && hours < 18) {
-      speechMessage = "Good Afternoon, sir";
-    } else if (hours >= 18 && hours < 24) {
-      speechMessage = "Good Evening, sir";
-    } else {
-      speechMessage = "Hello, sir";
-    }
+  let date = new Date();
+  let hours = date.getHours();
+  let speechMessage;
+  if (hours >= 1 && hours < 12) {
+    speechMessage = "Good Morning, sir";
+  } else if (hours >= 12 && hours < 18) {
+    speechMessage = "Good Afternoon, sir";
+  } else if (hours >= 18 && hours < 24) {
+    speechMessage = "Good Evening, sir";
+  } else {
+    speechMessage = "Hello, sir";
+  }
 
-    let speech = new SpeechSynthesisUtterance(speechMessage);
-    speech.lang = "en-US";
-    window.speechSynthesis.speak(speech);
-
+  let speech = new SpeechSynthesisUtterance(speechMessage);
+  speech.lang = "en-US";
+  window.speechSynthesis.speak(speech);
 }
 document.querySelector(".box").addEventListener("click", () => {
   sir();
   setTimeout(() => {
     window.speechSynthesis.cancel();
-  }, 3000);
+  }, 2000);
 });

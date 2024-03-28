@@ -15,14 +15,15 @@ function speak() {
   let date = new Date();
   let hours = date.getHours().toString().padStart(2, "0");
   let minutes = date.getMinutes().toString().padStart(2, "0");
-  if (hours >= 12) {
-    if (hours > 12) {
-      hours = hours - 12;
-    }
-    sound = `hello sir now time is ${hours}->${minutes} PM`;
-  } else {
-    sound = `hello sir now time is ${hours}->${minutes} AM`;
-  }
+ if (hours >= 1 && hours < 12) {
+   sound = `Good Morning sir, now time is${hours}:${minutes}`;
+ } else if (hours >= 12 && hours < 18) {
+   sound = `Good Afternoon, sir now time is ${hours}:${minutes}`;
+ } else if (hours >= 18 && hours < 24) {
+   sound = `Good Evening sir, now time is ${hours}:${minutes}`;
+ } else {
+   sound = `Hello sir, now time is ${hours}:${minutes}`;
+ }
   let msg = new SpeechSynthesisUtterance();
   msg.lang = "en-IN";
   msg.rate = 1;
@@ -32,8 +33,7 @@ function speak() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Wait for page to load before calling speak function
-  // Otherwise, the element with class "box" may not have been created yet
+  
   speak();
   document.querySelector(".box").addEventListener("click", speak);
 });

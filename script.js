@@ -9,28 +9,31 @@ setInterval(() => {
   m = `${hours}:${minutes}:${seconds}`;
   p.innerHTML = m;
 }, 1000);
-
-function sir() {
+// ?speak
+function speak() {
+  let sound;
   let date = new Date();
-  let hours = date.getHours();
-  let speechMessage;
-  if (hours >= 1 && hours < 12) {
-    speechMessage = "Good Morning, sir";
-  } else if (hours >= 12 && hours < 18) {
-    speechMessage = "Good Afternoon, sir";
-  } else if (hours >= 18 && hours < 24) {
-    speechMessage = "Good Evening, sir";
+  let hours = date.getHours().toString().padStart(2, "0");
+  let minutes = date.getMinutes().toString().padStart(2, "0");
+  if (hours >= 12) {
+    if (hours > 12) {
+      hours = hours - 12;
+    }
+    sound = `hello sir now time is ${hours}->>${minutes} PM`;
   } else {
-    speechMessage = "Hello, sir";
+    sound = `hello sir now time is ${hours}->>${minutes} AM`;
   }
-
-  let speech = new SpeechSynthesisUtterance(speechMessage);
-  speech.lang = "en-US";
-  window.speechSynthesis.speak(speech);
+  let msg = new SpeechSynthesisUtterance();
+  msg.lang = "en-IN";
+  msg.rate = 1;
+  msg.text = sound;
+  console.log(sound);
+  window.speechSynthesis.speak(msg);
 }
-document.querySelector(".box").addEventListener("click", () => {
-  sir();
-  setTimeout(() => {
-    window.speechSynthesis.cancel();
-  }, 2000);
+
+window.addEventListener("DOMContentLoaded", () => {
+  // Wait for page to load before calling speak function
+  // Otherwise, the element with class "box" may not have been created yet
+  speak();
+  document.querySelector(".box").addEventListener("click", speak);
 });

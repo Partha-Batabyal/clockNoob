@@ -19,9 +19,9 @@ function speak() {
     if (hours > 12) {
       hours = hours - 12;
     }
-    sound = `hello sir now time is ${hours}->>${minutes} PM`;
+    sound = `hello sir now time is ${hours}->${minutes} PM`;
   } else {
-    sound = `hello sir now time is ${hours}->>${minutes} AM`;
+    sound = `hello sir now time is ${hours}->${minutes} AM`;
   }
   let msg = new SpeechSynthesisUtterance();
   msg.lang = "en-IN";
